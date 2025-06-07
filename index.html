@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - CyberNet Access</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #FF4040;
+      --secondary-color: #8B0000;
+      --bg-start: #1C0000;
+      --bg-end: #2F0000;
+      --text-color: #FF6666;
+      --shadow-primary: rgba(255, 64, 64, 0.8);
+      --shadow-secondary: rgba(139, 0, 0, 0.4);
+      --container-bg: rgba(0, 0, 0, 0.9);
+      --border-primary: #FF4040;
+      --border-secondary: #8B0000;
+      --font-body: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQoU2NkYGD4z8DAwMgIBoYgGoyAQRANACmaB7Y8e9g1AAAAAElFTkSuQmCC');
+      opacity: 0.05;
+      z-index: -1;
+    }
+
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.2;
+    }
+
+    .login-container {
+      background: var(--container-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 25px var(--shadow-primary), 0 0 40px var(--shadow-secondary);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      border: 1px solid var(--border-primary);
+      position: relative;
+      z-index: 2;
+    }
+
+    .login-container::before {
+      content: '\f023';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      font-size: 120px;
+      color: rgba(255, 64, 64, 0.15);
+      transform: rotate(45deg);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      font-weight: 400;
+      text-shadow: 0 0 15px var(--primary-color);
+      margin-bottom: 1.5rem;
+      animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, 1px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input[type="password"] {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid var(--secondary-color);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    input[type="password"]::placeholder {
+      color: #b0b0ff;
+    }
+
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 12px var(--primary-color);
+    }
+
+    button {
+      background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+      color: #000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      animation: pulse 2s infinite;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px var(--primary-color); }
+      50% { box-shadow: 0 0 20px var(--primary-color); }
+      100% { box-shadow: 0 0 10px var(--primary-color); }
+    }
+
+    button:hover:not(:disabled) {
+      box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .note {
+      margin: 1rem 0;
+      color: #b0b0ff;
+      font-size: 0.95rem;
+    }
+
+    .whatsapp-link {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+      color: #000;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      text-align: center;
+      text-decoration: none;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 10px var(--primary-color);
+      margin-top: 0.5rem;
+    }
+
+    .whatsapp-link i {
+      margin-right: 0.5rem;
+    }
+
+    #notification {
+      display: none;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: rgba(255, 0, 0, 0.7);
+      color: var(--text-color);
+      box-shadow: 0 0 12px var(--secondary-color);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="login-container">
+    <h1>System Access</h1>
+    <form id="loginForm" novalidate>
+      <input type="password" id="password" placeholder="Enter Password" aria-label="Password" required />
+      <button type="submit">
+        <i class="fas fa-lock"></i> Login
+      </button>
+    </form>
+    <div id="notification" role="alert"></div>
+    <p class="note">Contact the owner for the password.</p>
+<a href="https://wa.me/923021236630?text=%F0%9F%94%93%20SYSTEM%20BREACH%20INITIATED...%0A%0A%F0%9F%93%A1%20CyberNet%20gateway%20pinged%20successfully.%0A%0A%F0%9F%92%AC%20Requesting%20decryption%20key%20for%20SIM%20database%20access.%0A%0A%F0%9F%A7%A0%20Identity%20Verified%3A%20Ready%20to%20receive%20classified%20credentials.%0A%0A%F0%9F%95%B6%EF%B8%8F%20%5BAwaiting%20secure%20transmission...%5D" target="_blank" rel="noopener" class="whatsapp-link">
+  <button>
+    <i class="fab fa-whatsapp"></i> Owner
+  </button>
+</a>
+
+</a>
+  </div>
+
+  <script>
+    // Matrix Effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) {
+      drops[x] = 1;
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#FF4040';
+      ctx.font = fontSize + 'px Share Tech Mono';
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars.charAt(Math.floor(Math.random() * chars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+
+    // Form Logic
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('password');
+    const notificationEl = document.getElementById('notification');
+
+    function showNotification(message) {
+      notificationEl.textContent = message;
+      notificationEl.style.display = 'block';
+      setTimeout(() => {
+        notificationEl.style.display = 'none';
+        notificationEl.textContent = '';
+      }, 3000);
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = passwordInput.value.trim();
+      if (!password) {
+        showNotification('Enter a password to proceed.');
+        return;
+      }
+      if (password === 'Badshah|Backdoor2025') {
+        window.location.href = 'index.html';
+      } else {
+        showNotification('Access denied. Invalid password.');
+        passwordInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
